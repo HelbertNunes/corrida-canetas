@@ -11,6 +11,10 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'iniciar-corrida',
+    loadChildren: () => import('./iniciar-corrida/iniciar-corrida.module').then( m => m.IniciarCorridaPageModule)
+  },
 ];
 
 @NgModule({
