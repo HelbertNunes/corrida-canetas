@@ -35,8 +35,7 @@
     border-width: 8px;        
   }
 
-.img-background{
-    // background-image: url('../../assets/imgs/background/drawable-ldpi/fundo.png');
-    color:  rgb(3, 3, 3);
-    background-size: cover;
+ion-content{
+    // background-image: url('../../assets/imgs/background/fundo.png');
+    --ion-background-color: #494545;
 }
