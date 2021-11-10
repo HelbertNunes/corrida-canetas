@@ -16,7 +16,7 @@
 @import "~@ionic/angular/css/normalize.css";
 @import "~@ionic/angular/css/structure.css";
 @import "~@ionic/angular/css/typography.css";
-@import '~@ionic/angular/css/display.css';
+@import "~@ionic/angular/css/display.css";
 
 /* Optional CSS utils that can be commented out */
 @import "~@ionic/angular/css/padding.css";
@@ -25,17 +25,31 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
-.botoes-paginas{
-    --ion-color-primary: #F6A02D;
-    --ion-text-color: #ffffff;    
-    font-family: Marvin;
-    // font-size: ;
-    text-align: center;
-    border-color: #ffffff;
-    border-width: 8px;        
-  }
+.botoes-paginas,
+.botao-comprar {
+  font-family: Marvin;
+  font-size: 25px;
+  width: 320px;
+  height: 81.3px;
+  text-align: center;
+  border: 8px solid #ffffff;
+  border-radius: 25px;
+  --ion-text-color: #ffffff;
+}
+.botoes-paginas {
+  --ion-color-primary: #f6a02d;
+}
+.botao-comprar {
+  --ion-color-primary: #38bb8d;
+}
 
-ion-content{
-    // background-image: url('../../assets/imgs/background/fundo.png');
-    --ion-background-color: #494545;
+.wrapper {
+  margin-top: 40%;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+}
+ion-content {
+  // background-image: url('../../assets/imgs/background/fundo.png');
+  --ion-background-color: #494545;
 }

@@ -15,6 +15,18 @@ const routes: Routes = [
     path: 'iniciar-corrida',
     loadChildren: () => import('./iniciar-corrida/iniciar-corrida.module').then( m => m.IniciarCorridaPageModule)
   },
+  {
+    path: 'quadro-recordes',
+    loadChildren: () => import('./quadro-recordes/quadro-recordes.module').then( m => m.QuadroRecordesPageModule)
+  },
+  {
+    path: 'aprenda-jogar',
+    loadChildren: () => import('./aprenda-jogar/aprenda-jogar.module').then( m => m.AprendaJogarPageModule)
+  },
+  {
+    path: 'comprar-jogo',
+    loadChildren: () => import('./comprar-jogo/comprar-jogo.module').then( m => m.ComprarJogoPageModule)
+  },
 ];
 
 @NgModule({
