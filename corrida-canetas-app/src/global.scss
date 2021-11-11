@@ -29,7 +29,7 @@
 
 .botoes-paginas,
 .botao-comprar {
-  font-family: 'Marvin';
+  font-family: "Marvin";
   font-size: 25px;
   width: 320px;
   height: 81.3px;
@@ -39,20 +39,28 @@
   --ion-text-color: #ffffff;
   flex-flow: column;
 }
+
 .botoes-paginas {
   --ion-color-primary: #f6a02d;
 }
+
 .botao-comprar {
   --ion-color-primary: #38bb8d;
 }
 
 .wrapper {
-  margin-top: 40%;
   display: grid;
   align-items: center;
   justify-items: center;
 }
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
 ion-content {
-  // background-image: url('../../assets/imgs/background/fundo.png');
-  --ion-background-color: #494545;
+  --background: url("/assets/imgs/background/fundo.png");
 }
