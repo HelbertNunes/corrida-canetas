@@ -27,6 +27,10 @@ const routes: Routes = [
     path: 'comprar-jogo',
     loadChildren: () => import('./comprar-jogo/comprar-jogo.module').then( m => m.ComprarJogoPageModule)
   },
+  {
+    path: 'escolher-pistas',
+    loadChildren: () => import('./escolher-pistas/escolher-pistas.module').then( m => m.EscolherPistasPageModule)
+  },
 ];
 
 @NgModule({

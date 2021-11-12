@@ -28,16 +28,36 @@
 @import url(//db.onlinewebfonts.com/c/d29e5b2a70883f04b6d8cce692f3616b?family=Marvin);
 
 .botoes-paginas,
-.botao-comprar {
+.botao-comprar,
+.botoes-voltar,
+.botoes-rodape {
   font-family: "Marvin";
-  font-size: 25px;
-  width: 320px;
-  height: 81.3px;
   text-align: center;
   border: 8px solid #ffffff;
   border-radius: 25px;
   --ion-text-color: #ffffff;
   flex-flow: column;
+}
+
+.botoes-paginas,
+.botao-comprar {
+  font-size: 25px;
+  width: 320px;
+  height: 81.3px;  
+}
+
+.botoes-voltar {
+  --ion-color-primary: #E83C47;
+  font-size: 32px;
+  width: 46px;
+  height: 95px;  
+}
+
+.botoes-rodape {
+  --ion-color-primary: #38bb8d;
+  font-size: 32px;
+  width: 271px;
+  height: 95px;  
 }
 
 .botoes-paginas {
