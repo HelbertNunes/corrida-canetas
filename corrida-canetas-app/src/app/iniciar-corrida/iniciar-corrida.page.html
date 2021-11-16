@@ -1,13 +1,30 @@
 <ion-content>
-  <ion-grid class="wrapper">    
+  <ion-grid class="wrapper">
     <ion-row>
-      <ion-button routerLink="/iniciar-corrida" class="botoes-paginas">
+      <ion-button class="botoes-paginas">
         QUEM VAI <br> JOGAR?
       </ion-button>
     </ion-row>
     <ion-row>
-      <ion-button routerLink="/home" class="botoes-voltar"> < </ion-button>
-      <ion-button routerLink="/escolher-pistas" class="botoes-rodape">ESCOLHER <br> AS PISTAS</ion-button>
+      <ion-col size="12"></ion-col>
+      <ion-input type="text" placeholder="Jogador 1" style="background-color: #FFFFFF;"></ion-input>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12"></ion-col>
+      <ion-input type="text" placeholder="Jogador 2" style="background-color: #FFFFFF;"></ion-input>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12"></ion-col>
+      <ion-input type="text" placeholder="Jogador 3" style="background-color: #FFFFFF;"></ion-input>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12"></ion-col>
+      <ion-input type="text" placeholder="Jogador 4" style="background-color: #FFFFFF;"></ion-input>
+    </ion-row>
+    <ion-row>
+      <ion-button routerLink="/home" class="botoes-voltar">
+        < </ion-button>
+          <ion-button routerLink="/escolher-pistas" class="botoes-rodape">ESCOLHER <br> AS PISTAS</ion-button>
     </ion-row>
   </ion-grid>
 </ion-content>
