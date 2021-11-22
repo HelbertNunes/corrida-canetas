@@ -31,6 +31,10 @@ const routes: Routes = [
     path: 'escolher-pistas',
     loadChildren: () => import('./escolher-pistas/escolher-pistas.module').then( m => m.EscolherPistasPageModule)
   },
+  {
+    path: 'comecar-corrida',
+    loadChildren: () => import('./comecar-corrida/comecar-corrida.module').then( m => m.ComecarCorridaPageModule)
+  },
 ];
 
 @NgModule({
