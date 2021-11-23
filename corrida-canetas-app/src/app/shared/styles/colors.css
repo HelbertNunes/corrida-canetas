@@ -1,0 +1,11 @@
+.button-primary {
+    --ion-color-primary: #f6a02d;
+}
+
+.button-secondary {
+    --ion-color-primary: #38bb8d;
+}
+
+.button-danger {
+    --ion-color-primary: #E83C47;
+}
