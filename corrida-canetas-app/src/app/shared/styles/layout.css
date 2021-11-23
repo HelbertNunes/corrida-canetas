@@ -1,0 +1,10 @@
+.button {
+    font-family: "Marvin";
+    text-align: center;
+    --ion-text-color: #ffffff;
+    --border-radius: 15px;
+    --border-width: 8px;
+    --border-color:#ffffff;
+    --border-style: solid;
+    flex-flow: column;
+}
