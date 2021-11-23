@@ -34,7 +34,11 @@ const routes: Routes = [
   {
     path: 'comecar-corrida',
     loadChildren: () => import('./comecar-corrida/comecar-corrida.module').then( m => m.ComecarCorridaPageModule)
+  },  {
+    path: 'exit',
+    loadChildren: () => import('./exit/exit.module').then( m => m.ExitPageModule)
   },
+
 ];
 
 @NgModule({
