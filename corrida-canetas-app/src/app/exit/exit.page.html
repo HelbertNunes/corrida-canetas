@@ -1,0 +1,20 @@
+
+<ion-content class="no-scroll">
+  <div class="wrapper">
+    <ion-grid class="square">
+      <ion-row>
+        <ion-col sizeLg="12" sizeMd="12" sizeXs="12" class="ion-text-center">
+          Tem certeza que deseja sair e cancelar o início da partida?
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col sizeLg="6" sizeMd="6" sizeXs="6" class="ion-text-center">
+          <ion-button routerLink="/home" color="danger" size="large">Sair</ion-button>
+        </ion-col>
+        <ion-col sizeLg="6" sizeMd="6" sizeXs="6" class="ion-text-center" >
+          <ion-button color="success" size="large"(click)='goBack()'>Ficar</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>
