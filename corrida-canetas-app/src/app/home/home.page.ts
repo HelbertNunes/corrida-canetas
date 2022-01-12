@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +8,10 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  constructor(
+    private iab: InAppBrowser) { }
 
+    abreSiteCompra(){
+      this.iab.create("https://loja.geeksnorcs.com.br/corrida-de-canetas/");
+    }
 }

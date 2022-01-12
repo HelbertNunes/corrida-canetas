@@ -1,5 +1,7 @@
 {
   "name": "corrida-canetas-app",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
