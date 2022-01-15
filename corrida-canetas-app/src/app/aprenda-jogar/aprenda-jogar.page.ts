@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { YoutubeVideoPlayer } from '@awesome-cordova-plugins/youtube-video-player/ngx';
 
 @Component({
   selector: 'app-aprenda-jogar',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AprendaJogarPage implements OnInit {
 
-  constructor() { }
+  constructor(private youtube: YoutubeVideoPlayer) { }
 
   ngOnInit() {
+    this.youtube.openVideo('Kzuo6hJit8Q&t=20s');
   }
 
 }
