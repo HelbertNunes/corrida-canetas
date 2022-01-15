@@ -10,7 +10,9 @@ export class AprendaJogarPage implements OnInit {
 
   constructor(private youtube: YoutubeVideoPlayer) { }
 
-  ngOnInit() {
+  ngOnInit() {    
+  }
+  videoTutorialPlay(){
     this.youtube.openVideo('Kzuo6hJit8Q&t=20s');
   }
 
