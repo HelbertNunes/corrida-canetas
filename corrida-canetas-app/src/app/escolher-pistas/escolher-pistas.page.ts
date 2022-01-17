@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
+import { PistasService, Pista } from "../service/pistas.service";
 
-interface Pista {
-  nome: string;
-  imagem: string;
-  selecionado: boolean;
-}
 
 @Component({
   selector: 'app-escolher-pistas',
@@ -14,40 +10,12 @@ interface Pista {
 })
 export class EscolherPistasPage {
 
-  pistas: Pista[] = [
-    {
-      nome: 'Beach Cup',
-      imagem: 'beach_cup.png',
-      selecionado: false,
-    },
-    {
-      nome: 'Bedroom Cup',
-      imagem: 'bedroom_cup.png',
-      selecionado: false,
-    },
-    {
-      nome: 'Picnic Cup',
-      imagem: 'picnic_cup.png',
-      selecionado: false,
-    },
-    {
-      nome: 'Kitchen Cup',
-      imagem: 'kitchen_cup.png',
-      selecionado: false,
-    },
-    {
-      nome: 'Playground Cup',
-      imagem: 'playground_cup.png',
-      selecionado: false,
-    },
-    {
-      nome: 'Tabletop Cup',
-      imagem: 'tabletop_cup.png',
-      selecionado: false,
-    },
-  ];
-
-  constructor(public router: Router) {
+  pistas: Pista[];
+  constructor(public router: Router,
+    public pistasService: PistasService) {
+    pistasService.pistas.subscribe(value => {
+      this.pistas = value;
+    });
   }
 
   selecionarPista(index: number) {
@@ -63,12 +31,17 @@ export class EscolherPistasPage {
       alert('Selecione as 3 pistas do circuito!');
       return;
     }
+    if (pistasSelecionadas.length > 3) {
+      alert('Você só pode selecionar 3 pistas para o circuito!');
+      return;
+    }
+      console.log(pistasSelecionadas);
+      this.pistasService.salvarpistas(this.pistas);
+      this.router.navigate(['comecar-corrida', { pistasSelecionadas: pistasSelecionadas.map(x => x.nome) }]);
+    }
 
-    //this.router.navigate(['home', { pistasSelecionadas: pistasSelecionadas.map(x => x.nome) }]);
+    urlImagem(imagem: string) {
+      return `../../assets/imgs/pistas/${imagem}`;
+    }
+
   }
-
-  urlImagem(imagem: string) {
-    return `../../assets/imgs/pistas/${imagem}`;
-  }
-
-}

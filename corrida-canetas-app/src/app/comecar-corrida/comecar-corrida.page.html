@@ -1,19 +1,23 @@
 <ion-content>
   <ion-grid class="wrapper">
+      <ion-row>
+        <ion-button class="header-button button-primary texto-principal fs-42" >
+          PODEMOS<br> COMEÇAR?
+        </ion-button>
+      </ion-row>
     <ion-row>
-      <ion-button class="botoes-paginas">
-        PODEMOS<br> COMEÇAR?
-      </ion-button>
-    </ion-row>
-    <ion-row>
-      <ion-col col-12>
-        <img src="../../assets/imgs/pistas/beach_cup.png">
-        <!-- <img src="../../assets/imgs/pistas/beach_cup.png" (click)="tocaSomTorcida()"> -->
+      <ion-col size="12">
+        <img [src]="urlImagem()" />
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-button routerLink="/escolher-pistas" class="botoes-voltar"> < </ion-button>
-      <ion-button routerLink="/comecar-corrida" class="botoes-rodape">IR PARA A <br> PARTIDA</ion-button>
+      <ion-col size="3">
+        <ion-button routerLink="/escolher-pistas" class="button button-danger botao-voltar fs-32">
+          < </ion-button>
+      </ion-col>
+      <ion-col size="9">
+        <ion-button class="button button-secondary botao-partida fs-32">COMEÇAR!</ion-button>
+      </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>
