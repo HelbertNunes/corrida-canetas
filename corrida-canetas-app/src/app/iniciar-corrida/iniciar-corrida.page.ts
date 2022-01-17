@@ -26,7 +26,7 @@ export class IniciarCorridaPage implements OnInit {
   }
 
   adicionarJogador() {
-    if (this.jogadores.length === 4) {
+    if (this.jogadores.length === 8) {
       return;
     }
 

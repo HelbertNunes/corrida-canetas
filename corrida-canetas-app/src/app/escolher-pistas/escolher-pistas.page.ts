@@ -59,8 +59,8 @@ export class EscolherPistasPage {
       return value.selecionado === true;
     });
 
-    if (pistasSelecionadas.length === 0) {
-      alert('Selecione pelo menos uma pista!');
+    if (pistasSelecionadas.length < 3) {
+      alert('Selecione as 3 pistas do circuito!');
       return;
     }
 

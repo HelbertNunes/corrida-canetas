@@ -1,52 +1,24 @@
 <ion-content>
   <ion-grid class="wrapper">
     <ion-row>
-      <ion-button class="button button-primary fs-25">
+      <ion-button class="button button-primary texto-principal fs-32">
         QUAIS PISTAS <br> VOCÊ QUER <br> CORRER?
       </ion-button>
     </ion-row>
-
-    <div *ngFor="let pista of pistas; let indexOfelement = index;" (click)="selecionarPista(indexOfelement)">
-      <img [src]="urlImagem(pista.imagem)" [ngClass]="{ 'pista-nao-selecionada': !pista.selecionado }" />
-    </div>
-
-    <div>
-      <ion-button (click)="irParaCorrida()">Continuar</ion-button>
-    </div>
-
-    <!--
     <ion-row>
-      <ion-col col-6>
-        <img src="../../assets/imgs/pistas/beach_cup.png">
-      </ion-col>
-      <ion-col col-6>
-        <img src="../../assets/imgs/pistas/bedroom_cup.png">
+      <ion-col size="6" *ngFor="let pista of pistas; let indexOfelement = index;"
+        (click)="selecionarPista(indexOfelement)">
+        <img [src]="urlImagem(pista.imagem)" [ngClass]="{ 'pista-nao-selecionada': !pista.selecionado }" />
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col col-6>
-        <img src="../../assets/imgs/pistas/picnic_cup.png">
+      <ion-col size="3">
+        <ion-button routerLink="/iniciar-corrida" class="button button-danger botao-voltar fs-32">
+          < </ion-button>
       </ion-col>
-      <ion-col col-6>
-        <img src="../../assets/imgs/pistas/kitchen_cup.png">
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col col-6>
-        <img src="../../assets/imgs/pistas/playground_cup.png">
-      </ion-col>
-      <ion-col col-6>
-        <img src="../../assets/imgs/pistas/tabletop_cup.png">
+      <ion-col size="9">
+        <ion-button (click)="irParaCorrida()" class="button button-secondary botao-partida fs-32">IR PARA A <br> PARTIDA</ion-button>
       </ion-col>
     </ion-row>
-    <ion-row>
-      <ion-col >
-        <img src="../../assets/imgs/pistas/random.png" >
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-button [routerLink]="['/iniciar-corrida', pistasSelecionadas]" class="button button-danger back-button fs-25"> < </ion-button>
-      <ion-button routerLink="/comecar-corrida" class="button button-secondary menu-button fs-25">IR PARA A <br> PARTIDA</ion-button>
-    </ion-row>-->
   </ion-grid>
 </ion-content>
