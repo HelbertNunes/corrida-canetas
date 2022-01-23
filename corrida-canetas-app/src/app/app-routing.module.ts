@@ -42,6 +42,10 @@ const routes: Routes = [
     path: 'contagem',
     loadChildren: () => import('./contagem/contagem.module').then( m => m.ContagemPageModule)
   },
+  {
+    path: 'pontuacao',
+    loadChildren: () => import('./pontuacao/pontuacao.module').then( m => m.PontuacaoPageModule)
+  },
 
 ];
 

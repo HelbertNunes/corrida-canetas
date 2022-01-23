@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-contagem',
@@ -9,16 +10,25 @@ import { Platform } from '@ionic/angular';
 export class ContagemPage implements OnInit {
 
   constructor(
-    public platform: Platform
-  ) { }
+    public platform: Platform,
+    private router: Router
+  ) {
+    this.router.events.subscribe((e) => {
+      if (e instanceof NavigationEnd) {
+        this.carregaContagem()
+      }
+    });
+  }
 
   async ngOnInit() {
-    await this.carregaContagem()
   }
 
   async carregaContagem() {
     const body = document.getElementById("fundo");
-    const texto = document.getElementById("text");    
+    const texto = document.getElementById("text");
+    await this.delay(1000);
+    body.style.backgroundColor = '#e83c47';
+    texto.textContent = '3'
     await this.delay(1000);
     body.style.backgroundColor = '#F6A022';
     texto.textContent = '2'
