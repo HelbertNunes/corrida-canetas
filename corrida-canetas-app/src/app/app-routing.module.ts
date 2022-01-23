@@ -38,6 +38,10 @@ const routes: Routes = [
     path: 'exit',
     loadChildren: () => import('./exit/exit.module').then( m => m.ExitPageModule)
   },
+  {
+    path: 'contagem',
+    loadChildren: () => import('./contagem/contagem.module').then( m => m.ContagemPageModule)
+  },
 
 ];
 
