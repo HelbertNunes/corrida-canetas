@@ -1,9 +1,52 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>pontuacao</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-
+  <ion-grid class="wrapper">
+    <ion-row>
+      <ion-button class="button header-button button-primary botaoBanner fs-42">
+        QUAL FOI A <br> PONTUAÇÃO?
+      </ion-button>
+    </ion-row>
+    <ng-container *ngFor="let jogador of jogadores; let indexOfelement = index;">
+      <ion-row>
+        <ion-col size="12">
+          <ion-input type="text" class="jogadoresTexto" [value]="jogador.nome"></ion-input>
+          <ion-row>
+          <ion-col size="3" *ngFor="let trofeu of trofeus; let indexOfelement = index;"(click)="selecionarTrofeu(indexOfelement)">
+            <img [src]="urlImagem(trofeu.imagem)" [ngClass]="{ 'trofeu-nao-selecionado': !trofeu.selecionado }" />
+          </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="3">
+              <img src="../assets/imgs/icones/pare.png"/>
+            </ion-col>
+            <ion-col size="3">
+              <ion-input type="text" placeholder="" style="background-color: #FFFFFF;">
+              </ion-input>
+            </ion-col>
+            <ion-col size="3">
+              <img src="../assets/imgs/icones/bonus.png"/>
+            </ion-col>
+            <ion-col size="3">
+              <ion-input type="text" placeholder="" style="background-color: #FFFFFF;"></ion-input>
+            </ion-col>
+          </ion-row>
+          <!-- <ion-input type="text" placeholder="Jogador 1" style="background-color: #FFFFFF;"
+          (ionChange)="atualizarJogador($event, indexOfelement)" (ionBlur)="salvarJogadores()" [value]="jogador.nome">
+        </ion-input>
+        <ion-input type="text" placeholder="Jogador 1" style="background-color: #FFFFFF;"
+          (ionChange)="atualizarJogador($event, indexOfelement)" (ionBlur)="salvarJogadores()" [value]="jogador.nome">
+        </ion-input> -->
+        </ion-col>
+      </ion-row>
+    </ng-container>
+    <ion-row>
+      <!-- <ion-col size="3">
+        <ion-button routerLink="/home" class="button button-danger back-button fs-25">
+          < </ion-button>
+      </ion-col> -->
+      <!-- <ion-col size="9">
+        <ion-button (click)="salvarJogadores()" routerLink="/escolher-pistas"
+          class="button button-secondary footer-button fs-32">PRÓXIMA <br>PISTA</ion-button>
+      </ion-col> -->
+    </ion-row>
+  </ion-grid>
 </ion-content>

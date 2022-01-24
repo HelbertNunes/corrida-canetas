@@ -26,7 +26,7 @@ export class ContagemPage implements OnInit {
   async carregaContagem() {
     const body = document.getElementById("fundo");
     const texto = document.getElementById("text");
-    await this.delay(1000);
+    await this.delay(500);
     body.style.backgroundColor = '#e83c47';
     texto.textContent = '3'
     await this.delay(1000);
