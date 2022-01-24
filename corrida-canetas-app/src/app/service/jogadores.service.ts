@@ -1,9 +1,11 @@
 import {BehaviorSubject} from "rxjs";
 import {Injectable} from "@angular/core";
+import {Trofeu} from "../service/trofeus.service";
 
 export interface Jogador {
   nome: string;
   pontos: number;
+  trofeus: Trofeu[];
 }
 
 @Injectable()
@@ -13,6 +15,7 @@ export class JogadoresService {
     {
       nome: 'Jogador 1',
       pontos: 0,
+      trofeus: null,
     }
   ]);
 

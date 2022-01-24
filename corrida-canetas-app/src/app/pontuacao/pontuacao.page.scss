@@ -1,5 +1,5 @@
-.jogadoresTexto{
-    background-color: #3C8ACC;
+.jogadoresTexto {
+    background-color: #3c8acc;
     font-family: "Marvin";
     --color: #ffffff;
     width: 326px;
@@ -7,9 +7,10 @@
     text-align: center;
     border-radius: 15px;
     border-width: 8px;
+    margin-left: 5%;
 }
 
-.botaoBanner{
+.botaoBanner {
     height: 125.55px;
     width: 320.18px;
 }
@@ -17,4 +18,17 @@
 .trofeu-nao-selecionado {
     opacity: 0.5;
     border: yellow 2px;
-  }
+}
+
+.icones {
+    height: 55px;
+    width: 55px;
+}
+.footer-button{
+    height: 95.55px;
+    width: 271.67px;
+}
+.back-button{
+    height: 95.55px;
+    width: 46.84px;
+}

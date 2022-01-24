@@ -31,8 +31,28 @@ export class PontuacaoPage implements OnInit {
     return `../../assets/imgs/icones/${imagem}`;
   }
   
-  selecionarTrofeu(index: number) {
-    this.trofeus[index].selecionado = !this.trofeus[index].selecionado;
+  selecionarTrofeu(indexJogador: number,indexTrofeu: number ) {
+    var jogadorSelecionado = this.jogadores[indexJogador];
+    jogadorSelecionado.trofeus[indexTrofeu].selecionado = !jogadorSelecionado.trofeus[indexTrofeu].selecionado; 
+    this.jogadores[indexJogador] = jogadorSelecionado;
   }
+
+  salvaPontuacao() {
+    // const pistasSelecionadas = this.pistas.filter(value => {
+    //   return value.selecionado === true;
+    // });
+
+    // if (pistasSelecionadas.length < 3) {
+    //   alert('Selecione as 3 pistas do circuito!');
+    //   return;
+    // }
+    // if (pistasSelecionadas.length > 3) {
+    //   alert('Você só pode selecionar 3 pistas para o circuito!');
+    //   return;
+    // }
+      console.log(this.jogadores);
+      // this.pistasService.salvarpistas(this.pistas);
+      // this.router.navigate(['comecar-corrida', { pistasSelecionadas: pistasSelecionadas.map(x => x.nome) }]);
+    }
 
 }
