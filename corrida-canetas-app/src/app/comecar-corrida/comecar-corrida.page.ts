@@ -25,7 +25,16 @@ export class ComecarCorridaPage implements OnInit {
     let pistasSelecionadas = this.pistas.filter(value => {
       return value.selecionado === true;
     });
-
+    this.urlImagemBkg();
     return `../../assets/imgs/pistas/${pistasSelecionadas[0].imagem}`;
+  }
+
+  urlImagemBkg() {
+    let pistasSelecionadas = this.pistas.filter(value => {
+      return value.selecionado === true;
+    });
+    const bkg = document.getElementById("bkg");
+    // bkg.style.backgroundImage = `"url('../../assets/imgs/background/${pistasSelecionadas[0].backgroundImg}')"`;
+    bkg.style.backgroundImage = "url('../../assets/imgs/background/picnic.jpg')";
   }
 }

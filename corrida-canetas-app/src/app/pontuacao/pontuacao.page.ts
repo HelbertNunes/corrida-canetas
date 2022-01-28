@@ -24,7 +24,7 @@ export class PontuacaoPage implements OnInit {
     });
   }
 
-  ngOnInit() {
+  ngOnInit() {    
   }
 
   urlImagem(imagem: string) {
@@ -35,6 +35,16 @@ export class PontuacaoPage implements OnInit {
     var jogadorSelecionado = this.jogadores[indexJogador];
     jogadorSelecionado.trofeus[indexTrofeu].selecionado = !jogadorSelecionado.trofeus[indexTrofeu].selecionado; 
     this.jogadores[indexJogador] = jogadorSelecionado;
+    this.atualizaLabelPontuacao();
+    console.log(this.jogadores);
+  }
+
+  atualizaLabelPontuacao(){
+    for (var i = 0; i <= this.jogadores.length; i++) {
+      const label = document.getElementById(`lbPontuacao_${i}`);
+      this.jogadores[i].pontos = 13 + i;
+      label.textContent = this.jogadores[i].pontos.toString();      
+    }
   }
 
   salvaPontuacao() {
