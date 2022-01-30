@@ -4,7 +4,9 @@ import {Trofeu} from "../service/trofeus.service";
 
 export interface Jogador {
   nome: string;
+  faltas: number;
   pontos: number;
+  pontuacao: number;
   trofeus: Trofeu[];
 }
 
@@ -14,7 +16,9 @@ export class JogadoresService {
   public jogadores = new BehaviorSubject<Jogador[]>([
     {
       nome: 'Jogador 1',
+      faltas: 0,
       pontos: 0,
+      pontuacao: 0,
       trofeus: null,
     }
   ]);

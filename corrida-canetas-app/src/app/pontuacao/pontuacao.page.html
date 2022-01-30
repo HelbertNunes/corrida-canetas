@@ -21,16 +21,14 @@
             </ion-col>
             <ion-col size="3">
               <ion-input id="faltas_{{indexOfelement}}" type="number" inputmode="numeric"
-                class="inputs" (ionChange)="atualizarPontuacaoFaltas($event, indexOfelement)"
-                (ionBlur)="salvarPontucao()"></ion-input>
+                class="inputs" (ionChange)="atualizarFaltas($event, indexOfelement)" ></ion-input>
             </ion-col>
             <ion-col size="3">
               <img src="../assets/imgs/icones/bonus.png" class="icones" />
             </ion-col>
             <ion-col size="3">
               <ion-input id="pontos_{{indexOfelement}}" type="number" inputmode="numeric"
-                class="inputs" (ionChange)="atualizarPontuacaoPontos($event, indexOfelement)"
-                (ionBlur)="salvarPontucao()"></ion-input>
+                class="inputs" (ionChange)="atualizarPontos($event, indexOfelement)" ></ion-input>
             </ion-col>
             <p class="pontuacaoTexto" id="lbPontuacao_{{indexOfelement}}"></p>
           </ion-row>
@@ -49,7 +47,7 @@
           < </ion-button>
       </ion-col>
       <ion-col size="9">
-        <ion-button (click)="salvaPontuacao()" routerLink="/comecar-corrida"
+        <ion-button routerLink="/comecar-corrida"
           class="button button-secondary footer-button fs-32">PRÓXIMA <br>PISTA</ion-button>
       </ion-col>
     </ion-row>
