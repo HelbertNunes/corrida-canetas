@@ -10,24 +10,29 @@
         <ion-col size="12">
           <ion-input type="text" class="jogadoresTexto" [value]="jogador.nome"></ion-input>
           <ion-row>
-          <ion-col size="3" *ngFor="let trofeu of jogador.trofeus; let indexTrofeu = index;"(click)="selecionarTrofeu(indexOfelement, indexTrofeu)">
-            <img [src]="urlImagem(trofeu.imagem)" [ngClass]="{ 'trofeu-nao-selecionado': !trofeu.selecionado }" />
-          </ion-col>
+            <ion-col size="3" *ngFor="let trofeu of jogador.trofeus; let indexTrofeu = index;"
+              (click)="selecionarTrofeu(indexOfelement, indexTrofeu)">
+              <img [src]="urlImagem(trofeu.imagem)" [ngClass]="{ 'trofeu-nao-selecionado': !trofeu.selecionado }" />
+            </ion-col>
           </ion-row>
           <ion-row>
             <ion-col size="3">
-              <img src="../assets/imgs/icones/pare.png" class="icones"/>
+              <img src="../assets/imgs/icones/pare.png" class="icones" />
             </ion-col>
             <ion-col size="3">
-              <ion-input id="faltas_{{indexOfelement}}" type="number" inputmode="numeric" style="background-color: #FFFFFF;"></ion-input>
+              <ion-input id="faltas_{{indexOfelement}}" type="number" inputmode="numeric"
+                class="inputs" (ionChange)="atualizarPontuacaoFaltas($event, indexOfelement)"
+                (ionBlur)="salvarPontucao()"></ion-input>
             </ion-col>
             <ion-col size="3">
-              <img src="../assets/imgs/icones/bonus.png" class="icones"/>
+              <img src="../assets/imgs/icones/bonus.png" class="icones" />
             </ion-col>
             <ion-col size="3">
-              <ion-input id="pontos_{{indexOfelement}}" type="number" inputmode="numeric" style="background-color: #FFFFFF;"></ion-input>
+              <ion-input id="pontos_{{indexOfelement}}" type="number" inputmode="numeric"
+                class="inputs" (ionChange)="atualizarPontuacaoPontos($event, indexOfelement)"
+                (ionBlur)="salvarPontucao()"></ion-input>
             </ion-col>
-           <p class="pontuacaoTexto" id="lbPontuacao_{{indexOfelement}}">100</p>
+            <p class="pontuacaoTexto" id="lbPontuacao_{{indexOfelement}}"></p>
           </ion-row>
           <!-- <ion-input type="text" placeholder="Jogador 1" style="background-color: #FFFFFF;"
           (ionChange)="atualizarJogador($event, indexOfelement)" (ionBlur)="salvarJogadores()" [value]="jogador.nome">

@@ -5,7 +5,7 @@ import { Pista } from "../service/pistas.service";
 
 export interface Circuito {
   pistas: Pista[];
-  numeroVolta: Number;
+  numeroVolta: number;
   voltas: Volta[];
 }
 

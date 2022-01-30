@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { YoutubeVideoPlayer } from '@awesome-cordova-plugins/youtube-video-player/ngx';
-import { FileTransfer, FileUploadOptions, FileTransferObject } from '@awesome-cordova-plugins/file-transfer/ngx';
-import { File } from '@awesome-cordova-plugins/file';
+// import { FileTransfer, FileUploadOptions, FileTransferObject } from '@awesome-cordova-plugins/file-transfer/ngx';
+// import { File } from '@awesome-cordova-plugins/file';
 
 @Component({
   selector: 'app-aprenda-jogar',
@@ -10,9 +10,10 @@ import { File } from '@awesome-cordova-plugins/file';
 })
 export class AprendaJogarPage implements OnInit {  
 
-  constructor(private youtube: YoutubeVideoPlayer,
-    private transfer: FileTransfer
-    , private file: File) {
+  constructor(private youtube: YoutubeVideoPlayer)
+    // private transfer: FileTransfer
+    // , private file: File) 
+    {
     
   }
 
