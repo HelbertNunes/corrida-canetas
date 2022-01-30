@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PistasService, Pista } from "../service/pistas.service";
+import { CircuitosService, Circuito, Volta } from "../service/circuito.service";
+import { JogadoresService, Jogador } from "../service/jogadores.service";
 
 
 @Component({
@@ -11,10 +13,25 @@ import { PistasService, Pista } from "../service/pistas.service";
 export class EscolherPistasPage {
 
   pistas: Pista[];
+  circuito: Circuito;
+  voltas: Volta[];
+  jogadores: Jogador[];
+
   constructor(public router: Router,
-    public pistasService: PistasService) {
+    public pistasService: PistasService,
+    public circuitoService: CircuitosService,
+    public jogadoresService: JogadoresService) {
     pistasService.pistas.subscribe(value => {
       this.pistas = value;
+    });
+    circuitoService.circuito.subscribe(value => {
+      this.circuito = value;
+    });
+    circuitoService.voltas.subscribe(value => {
+      this.voltas = value;
+    });
+    jogadoresService.jogadores.subscribe(value => {
+      this.jogadores = value;
     });
   }
 
@@ -35,13 +52,36 @@ export class EscolherPistasPage {
       alert('Você só pode selecionar 3 pistas para o circuito!');
       return;
     }
-      console.log(pistasSelecionadas);
-      this.pistasService.salvarpistas(this.pistas);
-      this.router.navigate(['comecar-corrida', { pistasSelecionadas: pistasSelecionadas.map(x => x.nome) }]);
-    }
-
-    urlImagem(imagem: string) {
-      return `../../assets/imgs/pistas/${imagem}`;
-    }
-
+    this.pistasService.salvarpistas(this.pistas);
+    this.criaCircuito(pistasSelecionadas, this.jogadores);
+    this.router.navigate(['comecar-corrida', { pistasSelecionadas: pistasSelecionadas.map(x => x.nome) }]);
   }
+
+  criaCircuito(pistasSelecionadas: Pista[], jogadores: Jogador[]) {
+    this.circuito.pistas = pistasSelecionadas;
+    this.zeraPontuacoes(jogadores);
+    this.voltas.splice(0,this.voltas.length);
+    for (let pista of pistasSelecionadas) {
+      this.voltas.push({
+        jogadores: jogadores,
+        pista: pista,
+      });
+    }
+    this.circuitoService.salvarVoltas(this.voltas);
+    this.circuito.voltas = this.voltas;
+    this.circuitoService.salvarCircuito();
+    console.log(this.circuito);
+  }
+
+  zeraPontuacoes(jogadores: Jogador[]) {
+    for (let jogador of jogadores) {
+      jogador.pontos = 0;
+    }
+    this.jogadoresService.salvarJogadores(jogadores);
+  }
+
+  urlImagem(imagem: string) {
+    return `../../assets/imgs/pistas/${imagem}`;
+  }
+
+}

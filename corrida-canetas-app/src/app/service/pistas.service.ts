@@ -59,7 +59,6 @@ export class PistasService {
   }
 
   salvarpistas(pistas: Pista[]) {
-    console.log(pistas);
     this.pistas.next(pistas);
     localStorage.setItem('pistas', JSON.stringify(this.pistas.value));
   }

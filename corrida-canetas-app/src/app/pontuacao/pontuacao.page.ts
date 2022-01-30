@@ -36,7 +36,6 @@ export class PontuacaoPage implements OnInit {
     jogadorSelecionado.trofeus[indexTrofeu].selecionado = !jogadorSelecionado.trofeus[indexTrofeu].selecionado; 
     this.jogadores[indexJogador] = jogadorSelecionado;
     this.atualizaLabelPontuacao();
-    console.log(this.jogadores);
   }
 
   atualizaLabelPontuacao(){
@@ -60,7 +59,6 @@ export class PontuacaoPage implements OnInit {
     //   alert('Você só pode selecionar 3 pistas para o circuito!');
     //   return;
     // }
-      console.log(this.jogadores);
       // this.pistasService.salvarpistas(this.pistas);
       // this.router.navigate(['comecar-corrida', { pistasSelecionadas: pistasSelecionadas.map(x => x.nome) }]);
     }

@@ -43,7 +43,6 @@ export class TrofeusService {
   }
 
   salvarTrofeus(Trofeus: Trofeu[]) {
-    console.log(Trofeus);
     this.trofeus.next(Trofeus);
     localStorage.setItem('trofeus', JSON.stringify(this.trofeus.value));
   }

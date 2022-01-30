@@ -28,7 +28,6 @@ export class JogadoresService {
   }
 
   salvarJogadores(jogadores: Jogador[]) {
-    console.log(jogadores);
     this.jogadores.next(jogadores);
 
     localStorage.setItem('jogadores', JSON.stringify(this.jogadores.value));
