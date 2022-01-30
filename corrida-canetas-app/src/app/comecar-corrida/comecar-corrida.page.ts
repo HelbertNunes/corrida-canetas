@@ -9,32 +9,30 @@ import { PistasService, Pista } from "../service/pistas.service";
 })
 export class ComecarCorridaPage implements OnInit {
 
-  pistas: Pista[];
-  constructor(public router: Router,
-    public pistasService: PistasService) {
-    pistasService.pistas.subscribe(value => {
-      this.pistas = value;
-    });
+  pistaSelecionada: Pista;
+
+  constructor(public routr: Router, public pistasService: PistasService) {
+    pistasService.pistas.subscribe(pistas => this.setPistaSelecionada(pistas));
   }
 
+  ngOnInit() { }
 
-  ngOnInit() {
+  configuraIconePista() {
+    this.configuraFundoPista();
+
+    return `../../assets/imgs/pistas/${this.pistaSelecionada.imagem}`;
   }
 
-  urlImagem() {
-    let pistasSelecionadas = this.pistas.filter(value => {
-      return value.selecionado === true;
-    });
-    this.urlImagemBkg();
-    return `../../assets/imgs/pistas/${pistasSelecionadas[0].imagem}`;
+  configuraFundoPista() {
+    let fundoPistaSelecionada = this.pistaSelecionada.backgroundImg;
+
+    let urlFundoPista = `url('../../assets/imgs/background/${fundoPistaSelecionada}')`;
+
+    const fundoPista = document.getElementById("fundoPista");
+    fundoPista.style.backgroundImage = urlFundoPista;
   }
 
-  urlImagemBkg() {
-    let pistasSelecionadas = this.pistas.filter(value => {
-      return value.selecionado === true;
-    });
-    const bkg = document.getElementById("bkg");
-    // bkg.style.backgroundImage = `"url('../../assets/imgs/background/${pistasSelecionadas[0].backgroundImg}')"`;
-    bkg.style.backgroundImage = "url('../../assets/imgs/background/picnic.jpg')";
+  setPistaSelecionada(pistas: Pista[]) {
+    this.pistaSelecionada = pistas.filter(pista => pista.selecionado)[0];
   }
 }
