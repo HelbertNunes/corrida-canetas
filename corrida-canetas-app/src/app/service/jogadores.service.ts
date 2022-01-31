@@ -5,7 +5,8 @@ import {Trofeu} from "../service/trofeus.service";
 export interface Jogador {
   nome: string;
   faltas: number;
-  pontos: number;
+  bonus: number;
+  pontosTrofeu : number;
   pontuacao: number;
   trofeus: Trofeu[];
 }
@@ -17,7 +18,8 @@ export class JogadoresService {
     {
       nome: 'Jogador 1',
       faltas: 0,
-      pontos: 0,
+      bonus: 0,
+      pontosTrofeu:0,
       pontuacao: 0,
       trofeus: this.criaTrofeus(),
     }

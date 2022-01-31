@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { JogadoresService, Jogador } from "../service/jogadores.service";
 import { TrofeusService, Trofeu } from "../service/trofeus.service";
 import { CircuitosService, Circuito, Volta } from "../service/circuito.service";
+import { iif } from 'rxjs';
 
 @Component({
   selector: 'app-pontuacao',
@@ -42,53 +43,54 @@ export class PontuacaoPage implements OnInit {
       return;
     }
 
-    else {      
+    else {
       if (trofeuSelecionado[0] === jogador.trofeus[indexTrofeu]) {
-        jogador.pontuacao -= jogador.trofeus[indexTrofeu].pontos;
+        jogador.pontosTrofeu = 0;
       }
       else {
-        jogador.pontuacao += jogador.trofeus[indexTrofeu].pontos;
+        jogador.pontosTrofeu = jogador.trofeus[indexTrofeu].pontos;
       }
 
       jogador.trofeus[indexTrofeu].selecionado = !jogador.trofeus[indexTrofeu].selecionado;
       this.circuito.voltas[this.circuito.numeroVolta].jogadores[indexJogador] = jogador;
-      let pontuacaoText = document.getElementById(`lbPontuacao_${indexJogador}`);
       this.jogadores[indexJogador] = jogador;
-      pontuacaoText.innerText = jogador.pontuacao.toString();
-
-      this.salvarPontuacao();
+      this.atualizarPontuacao(null, indexJogador, 3);
     }
   }
 
   atualizarFaltas(event: any, index: number) {
-    this.atualizarPontuacao(event, index, false);
+    this.atualizarPontuacao(event, index, 2);
   }
 
   atualizarPontos(event: any, index: number) {
-    this.atualizarPontuacao(event, index, true);
+    this.atualizarPontuacao(event, index, 1);
   }
 
-  atualizarPontuacao(event: any, index: number, pontos: boolean) {
+  atualizarPontuacao(event: any, index: number, tipoPontuacao: number) {
     let jogador = this.circuito.voltas[this.circuito.numeroVolta].jogadores[index];
-    let valor = event.target.value != "" ? parseInt(event.target.value) : 0;
+    if (event != null) {
+      var valor = event.target.value != "" ? parseInt(event.target.value) : 0;
+    }
 
-    if (pontos)
-      jogador.pontos = valor;
+    if (tipoPontuacao == 1)
+      jogador.bonus = valor;
 
-    else
+    if (tipoPontuacao == 2)
       jogador.faltas = valor;
 
-    jogador.pontuacao = jogador.pontos - jogador.faltas;
-
+    jogador.pontuacao = jogador.bonus - jogador.faltas + jogador.pontosTrofeu;
     let pontuacaoText = document.getElementById(`lbPontuacao_${index}`);
     pontuacaoText.innerText = jogador.pontuacao.toString();
+    this.circuito.voltas[this.circuito.numeroVolta].jogadores[index] = jogador;
+    this.jogadores[index] = jogador;
+    console.log(jogador);
 
     this.salvarPontuacao();
   }
 
   salvarPontuacao() {
     this.jogadoresService.salvarJogadores(this.jogadores);
-    // this.circuitoService.salvarVoltas(this.circuito.voltas);
+    this.circuitoService.salvarVoltas(this.circuito.voltas);
     this.circuitoService.salvarCircuito();
   }
 }
