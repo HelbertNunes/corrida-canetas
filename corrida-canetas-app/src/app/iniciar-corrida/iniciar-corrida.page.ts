@@ -41,7 +41,7 @@ export class IniciarCorridaPage implements OnInit {
       pontos: 0,
       faltas: 0,
       pontuacao: 0,
-      trofeus: this.criaTrofeus(),
+      trofeus: this.jogadoresService.criaTrofeus(),
     });
     this.salvarJogadores();
   }
@@ -53,32 +53,5 @@ export class IniciarCorridaPage implements OnInit {
 
   salvarJogadores() {
     this.jogadoresService.salvarJogadores(this.jogadores);
-  }
-
-  criaTrofeus() {
-    {
-      return <Trofeu[]>([
-        {
-          nome: 'Bronze',
-          imagem: 'bronze.png',
-          selecionado: false,
-        },
-        {
-          nome: 'Prata',
-          imagem: 'prata.png',
-          selecionado: false,
-        },
-        {
-          nome: 'Ouro',
-          imagem: 'ouro.png',
-          selecionado: false,
-        },
-        {
-          nome: 'Diamante',
-          imagem: 'diamante.png',
-          selecionado: false,
-        },
-      ]);
-    }
   }
 }

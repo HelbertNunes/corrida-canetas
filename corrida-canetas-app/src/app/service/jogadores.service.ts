@@ -19,7 +19,7 @@ export class JogadoresService {
       faltas: 0,
       pontos: 0,
       pontuacao: 0,
-      trofeus: null,
+      trofeus: this.criaTrofeus(),
     }
   ]);
 
@@ -37,4 +37,30 @@ export class JogadoresService {
     localStorage.setItem('jogadores', JSON.stringify(this.jogadores.value));
   }
 
+  criaTrofeus() {
+    {
+      return <Trofeu[]>([
+        {
+          nome: 'Bronze',
+          imagem: 'bronze.png',
+          selecionado: false,
+        },
+        {
+          nome: 'Prata',
+          imagem: 'prata.png',
+          selecionado: false,
+        },
+        {
+          nome: 'Ouro',
+          imagem: 'ouro.png',
+          selecionado: false,
+        },
+        {
+          nome: 'Diamante',
+          imagem: 'diamante.png',
+          selecionado: false,
+        },
+      ]);
+    }
+  }
 }

@@ -46,6 +46,10 @@ const routes: Routes = [
     path: 'pontuacao',
     loadChildren: () => import('./pontuacao/pontuacao.module').then( m => m.PontuacaoPageModule)
   },
+  {
+    path: 'vencedor-corrida',
+    loadChildren: () => import('./vencedor-corrida/vencedor-corrida.module').then( m => m.VencedorCorridaPageModule)
+  },
 
 ];
 
