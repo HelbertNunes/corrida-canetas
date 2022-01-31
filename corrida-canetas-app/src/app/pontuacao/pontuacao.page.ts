@@ -32,9 +32,32 @@ export class PontuacaoPage implements OnInit {
   }
 
   selecionarTrofeu(indexJogador: number, indexTrofeu: number) {
-    let jogadorSelecionado = this.jogadores[indexJogador];
-    jogadorSelecionado.trofeus[indexTrofeu].selecionado = !jogadorSelecionado.trofeus[indexTrofeu].selecionado;
-    this.jogadores[indexJogador] = jogadorSelecionado;
+    let jogador = this.circuito.voltas[this.circuito.numeroVolta].jogadores[indexJogador];
+    const trofeuSelecionado = jogador.trofeus.filter(value => {
+      return value.selecionado === true;
+    });
+
+    if (trofeuSelecionado.length === 1 && !jogador.trofeus[indexTrofeu].selecionado) {
+      alert("Você só pode selecionar um troféu por jogador!");
+      return;
+    }
+
+    else {      
+      if (trofeuSelecionado[0] === jogador.trofeus[indexTrofeu]) {
+        jogador.pontuacao -= jogador.trofeus[indexTrofeu].pontos;
+      }
+      else {
+        jogador.pontuacao += jogador.trofeus[indexTrofeu].pontos;
+      }
+
+      jogador.trofeus[indexTrofeu].selecionado = !jogador.trofeus[indexTrofeu].selecionado;
+      this.circuito.voltas[this.circuito.numeroVolta].jogadores[indexJogador] = jogador;
+      let pontuacaoText = document.getElementById(`lbPontuacao_${indexJogador}`);
+      this.jogadores[indexJogador] = jogador;
+      pontuacaoText.innerText = jogador.pontuacao.toString();
+
+      this.salvarPontuacao();
+    }
   }
 
   atualizarFaltas(event: any, index: number) {
@@ -64,6 +87,8 @@ export class PontuacaoPage implements OnInit {
   }
 
   salvarPontuacao() {
-    this.circuitoService.salvarVoltas(this.circuito.voltas);
+    this.jogadoresService.salvarJogadores(this.jogadores);
+    // this.circuitoService.salvarVoltas(this.circuito.voltas);
+    this.circuitoService.salvarCircuito();
   }
 }

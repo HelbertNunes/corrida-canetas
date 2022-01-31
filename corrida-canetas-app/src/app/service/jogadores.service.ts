@@ -44,21 +44,25 @@ export class JogadoresService {
           nome: 'Bronze',
           imagem: 'bronze.png',
           selecionado: false,
+          pontos: 4
         },
         {
           nome: 'Prata',
           imagem: 'prata.png',
           selecionado: false,
+          pontos: 6
         },
         {
           nome: 'Ouro',
           imagem: 'ouro.png',
           selecionado: false,
+          pontos: 8
         },
         {
           nome: 'Diamante',
           imagem: 'diamante.png',
           selecionado: false,
+          pontos: 10
         },
       ]);
     }
