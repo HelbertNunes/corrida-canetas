@@ -75,7 +75,7 @@ export class EscolherPistasPage {
 
   zeraPontuacoes(jogadores: Jogador[]) {
     for (let jogador of jogadores) {
-      jogador.bonus = 0;
+      jogador.pontuacao = 0;
     }
     this.jogadoresService.salvarJogadores(jogadores);
   }
