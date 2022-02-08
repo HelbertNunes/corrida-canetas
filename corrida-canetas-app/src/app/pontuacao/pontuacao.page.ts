@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { JogadoresService, Jogador } from "../service/jogadores.service";
 import { TrofeusService, Trofeu } from "../service/trofeus.service";
 import { CircuitosService, Circuito, Volta } from "../service/circuito.service";
-import { iif } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pontuacao',
@@ -17,6 +17,7 @@ export class PontuacaoPage implements OnInit {
   circuito: Circuito;
 
   constructor(
+    public router: Router,
     public jogadoresService: JogadoresService,
     public trofeusService: TrofeusService,
     public circuitoService: CircuitosService
@@ -91,5 +92,14 @@ export class PontuacaoPage implements OnInit {
     this.jogadoresService.salvarJogadores(this.jogadores);
     this.circuitoService.salvarVoltas(this.circuito.voltas);
     this.circuitoService.salvarCircuito();
+  }
+
+  proximaPista() {
+    if (this.circuito.numeroVolta < 3) {
+      this.circuito.numeroVolta++;
+      this.circuitoService.salvarCircuito();
+      this.router.navigate(['comecar-corrida']);
+    }
+    this.router.navigate(['vencedor-corrida']);
   }
 }
