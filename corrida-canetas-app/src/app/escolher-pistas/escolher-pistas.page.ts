@@ -70,7 +70,6 @@ export class EscolherPistasPage {
     this.circuitoService.salvarVoltas(this.voltas);
     this.circuito.voltas = this.voltas;
     this.circuitoService.salvarCircuito();
-    console.log(this.circuito);
   }
 
   zeraPontuacoes(jogadores: Jogador[]) {

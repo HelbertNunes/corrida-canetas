@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PistasService, Pista } from "../service/pistas.service";
+import { CircuitosService, Circuito } from "../service/circuito.service";
 
 @Component({
   selector: 'app-comecar-corrida',
@@ -10,8 +11,10 @@ import { PistasService, Pista } from "../service/pistas.service";
 export class ComecarCorridaPage implements OnInit {
 
   pistaSelecionada: Pista;
+  circuito: Circuito;
 
-  constructor(public routr: Router, public pistasService: PistasService) {
+  constructor(public routr: Router, public pistasService: PistasService, public circuitoService: CircuitosService) {
+    circuitoService.circuito.subscribe(value => { this.circuito = value});
     pistasService.pistas.subscribe(pistas => this.setPistaSelecionada(pistas));
   }
 
@@ -33,6 +36,6 @@ export class ComecarCorridaPage implements OnInit {
   }
 
   setPistaSelecionada(pistas: Pista[]) {
-    this.pistaSelecionada = pistas.filter(pista => pista.selecionado)[0];
+    this.pistaSelecionada = this.circuito.pistas.filter(pista => pista.selecionado)[this.circuito.numeroVolta];
   }
 }

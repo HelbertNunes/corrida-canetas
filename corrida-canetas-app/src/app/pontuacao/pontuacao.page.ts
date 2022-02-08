@@ -83,7 +83,6 @@ export class PontuacaoPage implements OnInit {
     pontuacaoText.innerText = jogador.pontuacao.toString();
     this.circuito.voltas[this.circuito.numeroVolta].jogadores[index] = jogador;
     this.jogadores[index] = jogador;
-    console.log(jogador);
 
     this.salvarPontuacao();
   }
