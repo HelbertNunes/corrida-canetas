@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CircuitosService, Circuito, Volta } from "../service/circuito.service";
+import { JogadoresService, Jogador } from "../service/jogadores.service";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-vencedor-corrida',
@@ -7,8 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VencedorCorridaPage implements OnInit {
 
-  constructor() { }
+  jogadores: Jogador[];
+  circuito: Circuito;
 
+  constructor(
+    public router: Router,
+    public jogadoresService: JogadoresService,
+    public circuitoService: CircuitosService
+  ) {
+    circuitoService.circuito.subscribe(value => this.circuito = value);
+  }
   ngOnInit() {
   }
 

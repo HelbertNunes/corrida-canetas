@@ -95,11 +95,14 @@ export class PontuacaoPage implements OnInit {
   }
 
   proximaPista() {
-    if (this.circuito.numeroVolta < 3) {
+    console.log(this.circuito);
+    if (this.circuito.numeroVolta < 2) {
       this.circuito.numeroVolta++;
       this.circuitoService.salvarCircuito();
       this.router.navigate(['comecar-corrida']);
     }
-    this.router.navigate(['vencedor-corrida']);
+    else {
+      this.router.navigate(['vencedor-corrida']);
+    }
   }
 }
