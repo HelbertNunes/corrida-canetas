@@ -59,7 +59,6 @@ export class CircuitosService {
 
   salvarVolta(volta: Volta, index: number) {
     this.voltas[index] = volta;
-    this.voltas[index].next(volta);
     localStorage.setItem('Circuito', JSON.stringify(this.circuito.value));
   }
 
