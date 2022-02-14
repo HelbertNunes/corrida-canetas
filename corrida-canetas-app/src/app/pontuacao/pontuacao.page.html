@@ -5,7 +5,7 @@
         QUAL FOI A <br> PONTUAÇÃO?
       </ion-button>
     </ion-row>
-    <ng-container *ngFor="let jogador of jogadoresVisual; let indexOfelement = index;">
+    <ng-container *ngFor="let jogador of circuito.voltas[circuito.numeroVolta].jogadores; let indexOfelement = index;">
       <ion-row>
         <ion-col size="12">
           <ion-input type="text" class="jogadoresTexto" [value]="jogador.nome"></ion-input>
@@ -32,12 +32,6 @@
             </ion-col>
             <p class="pontuacaoTexto" id="lbPontuacao_{{indexOfelement}}"></p>
           </ion-row>
-          <!-- <ion-input type="text" placeholder="Jogador 1" style="background-color: #FFFFFF;"
-          (ionChange)="atualizarJogador($event, indexOfelement)" (ionBlur)="salvarJogadores()" [value]="jogador.nome">
-        </ion-input>
-        <ion-input type="text" placeholder="Jogador 1" style="background-color: #FFFFFF;"
-          (ionChange)="atualizarJogador($event, indexOfelement)" (ionBlur)="salvarJogadores()" [value]="jogador.nome">
-        </ion-input> -->
         </ion-col>
       </ion-row>
     </ng-container>

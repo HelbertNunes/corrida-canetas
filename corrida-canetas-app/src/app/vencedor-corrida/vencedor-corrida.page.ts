@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CircuitosService, Circuito, Volta } from "../service/circuito.service";
 import { JogadoresService, Jogador } from "../service/jogadores.service";
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-vencedor-corrida',
@@ -19,8 +19,26 @@ export class VencedorCorridaPage implements OnInit {
     public circuitoService: CircuitosService
   ) {
     circuitoService.circuito.subscribe(value => this.circuito = value);
+    this.router.events.subscribe((e) => {
+      if (e instanceof NavigationEnd) {
+        this.imprimirVencedor()
+      }
+    });
   }
   ngOnInit() {
+  }
+
+  imprimirVencedor(){
+    console.log(this.circuito);
+    let vencedor = this.definirVencedor();
+    let labelNomeVencedor = document.getElementById(`nomeVencedor`);
+    let labelPontuacao = document.getElementById(`pontuacaoVencedor`);
+    labelNomeVencedor.innerText = vencedor.nome;
+    labelPontuacao.innerText = vencedor.pontuacao.toString();
+  }
+
+  definirVencedor(){
+    return this.circuito.voltas[0].jogadores[0];
   }
 
 }

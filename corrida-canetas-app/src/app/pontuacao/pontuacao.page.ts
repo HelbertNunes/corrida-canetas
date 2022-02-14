@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { JogadoresService, Jogador } from "../service/jogadores.service";
-import { TrofeusService, Trofeu } from "../service/trofeus.service";
 import { CircuitosService, Circuito, Volta } from "../service/circuito.service";
 import { Router } from '@angular/router';
 
@@ -12,18 +11,13 @@ import { Router } from '@angular/router';
 
 export class PontuacaoPage implements OnInit {
 
-  jogadoresVisual: Jogador[];
-  trofeus: Trofeu[];
   circuito: Circuito;
 
   constructor(
     public router: Router,
     public jogadoresService: JogadoresService,
-    public trofeusService: TrofeusService,
     public circuitoService: CircuitosService
   ) {
-    jogadoresService.jogadores.subscribe(value => this.jogadoresVisual = value);
-    trofeusService.trofeus.subscribe(value => this.trofeus = value);
     circuitoService.circuito.subscribe(value => this.circuito = value);
   }
 
@@ -53,8 +47,8 @@ export class PontuacaoPage implements OnInit {
       }
 
       jogador.trofeus[indexTrofeu].selecionado = !jogador.trofeus[indexTrofeu].selecionado;
-      this.circuito.voltas[this.circuito.numeroVolta].jogadores[indexJogador].pontosTrofeu = jogador.pontosTrofeu;
-      this.jogadoresVisual[indexJogador].pontosTrofeu = jogador.pontosTrofeu;
+      let jogadorCopy = Object.assign(jogador);
+      this.circuito.voltas[this.circuito.numeroVolta].jogadores[indexJogador].pontosTrofeu = jogadorCopy.pontosTrofeu;
       this.atualizarPontuacao(null, indexJogador, 3);
     }
   }
@@ -68,8 +62,8 @@ export class PontuacaoPage implements OnInit {
   }
 
   atualizarPontuacao(event: any, index: number, tipoPontuacao: number) {
-    console.log(this.jogadoresVisual);
-    console.log(this.circuito.numeroVolta);
+    console.log(index);
+    console.log(this.circuito.voltas[this.circuito.numeroVolta]);
     let jogador = this.circuito.voltas[this.circuito.numeroVolta].jogadores[index];
     if (event != null) {
       var valor = event.target.value != "" ? parseInt(event.target.value) : 0;
@@ -84,23 +78,15 @@ export class PontuacaoPage implements OnInit {
     jogador.pontuacao = jogador.bonus - jogador.faltas + jogador.pontosTrofeu;
     let pontuacaoText = document.getElementById(`lbPontuacao_${index}`);
     pontuacaoText.innerText = jogador.pontuacao.toString();
-    this.circuito.voltas[this.circuito.numeroVolta].jogadores[index] = jogador;
-    console.log(this.circuito.voltas[this.circuito.numeroVolta].jogadores[index]);
-    this.salvarPontuacao();
-  }
-
-  salvarPontuacao() {
-    this.circuitoService.salvarCircuito();
+    this.circuitoService.salvarVolta(this.circuito.voltas[this.circuito.numeroVolta], this.circuito.numeroVolta);
+    console.log(this.circuito);
   }
 
   proximaPista() {
-    console.log(this.circuito);
-
-    this.reiniciaPontosJogadoresVisual();
 
     if (this.circuito.numeroVolta < 2) {
       this.circuito.numeroVolta++;
-      this.circuitoService.salvarCircuito();
+      this.reiniciaTrofeusVisual(this.circuito.numeroVolta);
       this.router.navigate(['comecar-corrida']);
     }
     else {
@@ -108,12 +94,8 @@ export class PontuacaoPage implements OnInit {
     }
   }
 
-  reiniciaPontosJogadoresVisual() {
-    this.jogadoresVisual.forEach(jogador => {
-      jogador.pontosTrofeu = 0;
-      jogador.pontuacao = 0;
-      jogador.bonus = 0;
-      jogador.faltas = 0;
+  reiniciaTrofeusVisual(index: number) {
+    this.circuito.voltas[index].jogadores.forEach(jogador => {
       jogador.trofeus.forEach(trofeu => {
         trofeu.selecionado = false;
       });
