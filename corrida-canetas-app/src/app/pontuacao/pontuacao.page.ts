@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { JogadoresService, Jogador } from "../service/jogadores.service";
 import { CircuitosService, Circuito, Volta } from "../service/circuito.service";
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-pontuacao',
@@ -12,23 +13,33 @@ import { Router } from '@angular/router';
 export class PontuacaoPage implements OnInit {
 
   circuito: Circuito;
+  voltas: Volta[];
+  jogadores: Jogador[];
 
   constructor(
     public router: Router,
     public jogadoresService: JogadoresService,
     public circuitoService: CircuitosService
-  ) {
-    circuitoService.circuito.subscribe(value => this.circuito = value);
-  }
+  ) { }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    this.circuitoService.circuito.subscribe(value => {
+      this.circuito = value;
+    });
+    this.circuitoService.voltas.subscribe(value => {
+      this.voltas = value;
+    });
+    this.jogadoresService.jogadores.subscribe(value => {
+      this.jogadores = value;
+    });
+  }
 
   urlImagem(imagem: string) {
     return `../../assets/imgs/icones/${imagem}`;
   }
 
   selecionarTrofeu(indexJogador: number, indexTrofeu: number) {
-    let jogador = this.circuito.voltas[this.circuito.numeroVolta].jogadores[indexJogador];
+    const jogador = this.jogadores[indexJogador];
     const trofeuSelecionado = jogador.trofeus.filter(value => {
       return value.selecionado === true;
     });
@@ -47,9 +58,8 @@ export class PontuacaoPage implements OnInit {
       }
 
       jogador.trofeus[indexTrofeu].selecionado = !jogador.trofeus[indexTrofeu].selecionado;
-      let jogadorCopy = Object.assign(jogador);
-      this.circuito.voltas[this.circuito.numeroVolta].jogadores[indexJogador].pontosTrofeu = jogadorCopy.pontosTrofeu;
-      this.atualizarPontuacao(null, indexJogador, 3);
+      // this.voltas[this.circuito.numeroVolta].jogadores[indexJogador].pontosTrofeu = jogador.pontosTrofeu;
+      // this.atualizarPontuacao(null, indexJogador, 3);
     }
   }
 
@@ -62,9 +72,8 @@ export class PontuacaoPage implements OnInit {
   }
 
   atualizarPontuacao(event: any, index: number, tipoPontuacao: number) {
-    console.log(index);
-    console.log(this.circuito.voltas[this.circuito.numeroVolta]);
-    let jogador = this.circuito.voltas[this.circuito.numeroVolta].jogadores[index];
+    const voltaAtualizada = this.voltas[this.circuito.numeroVolta];
+    let jogador = voltaAtualizada.jogadores[index];
     if (event != null) {
       var valor = event.target.value != "" ? parseInt(event.target.value) : 0;
     }
@@ -78,8 +87,8 @@ export class PontuacaoPage implements OnInit {
     jogador.pontuacao = jogador.bonus - jogador.faltas + jogador.pontosTrofeu;
     let pontuacaoText = document.getElementById(`lbPontuacao_${index}`);
     pontuacaoText.innerText = jogador.pontuacao.toString();
-    this.circuitoService.salvarVolta(this.circuito.voltas[this.circuito.numeroVolta], this.circuito.numeroVolta);
-    console.log(this.circuito);
+    voltaAtualizada[this.circuito.numeroVolta].jogadores[index] = jogador;
+    this.circuitoService.atualizaPontuacaoVolta(voltaAtualizada, this.circuito.numeroVolta);
   }
 
   proximaPista() {
@@ -87,6 +96,8 @@ export class PontuacaoPage implements OnInit {
     if (this.circuito.numeroVolta < 2) {
       this.circuito.numeroVolta++;
       this.reiniciaTrofeusVisual(this.circuito.numeroVolta);
+      this.circuitoService.salvarCircuito(this.circuito);
+      console.log(this.circuito);
       this.router.navigate(['comecar-corrida']);
     }
     else {

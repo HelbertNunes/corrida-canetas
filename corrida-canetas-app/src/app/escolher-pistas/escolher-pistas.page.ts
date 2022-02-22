@@ -64,12 +64,11 @@ export class EscolherPistasPage {
     for (let pista of pistasSelecionadas) {
       this.voltas.push({
         jogadores: jogadores,
-        pista: pista,
       });
     }
     this.circuitoService.salvarVoltas(this.voltas);
-    this.circuito.voltas = this.voltas;
-    this.circuitoService.salvarCircuito();
+    // this.circuito.voltas = this.voltas;
+    this.circuitoService.salvarCircuito(this.circuito);
   }
 
   zeraPontuacoes(jogadores: Jogador[]) {

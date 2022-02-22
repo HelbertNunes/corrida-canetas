@@ -11,7 +11,6 @@ export interface Circuito {
 
 export interface Volta {
   jogadores: Jogador[];
-  pista: Pista;
 }
 
 @Injectable()
@@ -20,7 +19,6 @@ export class CircuitosService {
   public voltas = new BehaviorSubject<Volta[]>([
     {
       jogadores: null,
-      pista : null
     }
   ]);
 
@@ -41,25 +39,28 @@ export class CircuitosService {
     if (!!CircuitoLocalStorage && !!CircuitoRaw) {
       this.circuito.next(CircuitoRaw);
     }
-    const VoltasLocalStorage = localStorage.getItem('Circuito');
+    const VoltasLocalStorage = localStorage.getItem('Voltas');
     const VoltasRaw = JSON.parse(VoltasLocalStorage);
     if (!!VoltasLocalStorage && !!VoltasRaw) {
       this.circuito.next(VoltasRaw);
     }
   }
 
-  salvarCircuito() {
+  salvarCircuito(Circuito: Circuito) {
+    Circuito.voltas = this.voltas.value;
+    this.circuito.next(Circuito);
     localStorage.setItem('Circuito', JSON.stringify(this.circuito.value));
   }
 
   salvarVoltas(Voltas: Volta[]) {
     this.voltas.next(Voltas);
-    localStorage.setItem('Circuito', JSON.stringify(this.circuito.value));
+    localStorage.setItem('Voltas', JSON.stringify(this.voltas.value));
   }
 
-  salvarVolta(volta: Volta, index: number) {
-    this.voltas[index] = volta;
-    localStorage.setItem('Circuito', JSON.stringify(this.circuito.value));
+  atualizaPontuacaoVolta(volta: Volta, numeroVolta: number) {
+    const voltas = this.voltas.value;
+    voltas[numeroVolta] = volta;
+    this.voltas.next(voltas);
+    console.log(this.voltas);
   }
-
 }
