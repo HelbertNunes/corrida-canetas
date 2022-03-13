@@ -30,8 +30,6 @@ export class CircuitosService {
     }
   );
 
-
-
   constructor(
   ) {
     const CircuitoLocalStorage = localStorage.getItem('Circuito');
@@ -62,5 +60,6 @@ export class CircuitosService {
     voltas[numeroVolta] = volta;
     this.voltas.next(voltas);
     console.log(this.voltas);
+    localStorage.setItem('Voltas', JSON.stringify(this.voltas.value));
   }
 }

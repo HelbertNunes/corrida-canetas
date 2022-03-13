@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { JogadoresService, Jogador } from "../service/jogadores.service";
 import { CircuitosService, Circuito, Volta } from "../service/circuito.service";
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-pontuacao',
@@ -59,7 +58,7 @@ export class PontuacaoPage implements OnInit {
 
       jogador.trofeus[indexTrofeu].selecionado = !jogador.trofeus[indexTrofeu].selecionado;
       // this.voltas[this.circuito.numeroVolta].jogadores[indexJogador].pontosTrofeu = jogador.pontosTrofeu;
-      // this.atualizarPontuacao(null, indexJogador, 3);
+      this.atualizarPontuacao(null, indexJogador, 3);
     }
   }
 
@@ -72,7 +71,7 @@ export class PontuacaoPage implements OnInit {
   }
 
   atualizarPontuacao(event: any, index: number, tipoPontuacao: number) {
-    const voltaAtualizada = this.voltas[this.circuito.numeroVolta];
+    const voltaAtualizada = this.voltas[this.circuito.numeroVolta];    
     let jogador = voltaAtualizada.jogadores[index];
     if (event != null) {
       var valor = event.target.value != "" ? parseInt(event.target.value) : 0;
@@ -87,7 +86,7 @@ export class PontuacaoPage implements OnInit {
     jogador.pontuacao = jogador.bonus - jogador.faltas + jogador.pontosTrofeu;
     let pontuacaoText = document.getElementById(`lbPontuacao_${index}`);
     pontuacaoText.innerText = jogador.pontuacao.toString();
-    voltaAtualizada[this.circuito.numeroVolta].jogadores[index] = jogador;
+    voltaAtualizada.jogadores[index] = jogador;
     this.circuitoService.atualizaPontuacaoVolta(voltaAtualizada, this.circuito.numeroVolta);
   }
 
