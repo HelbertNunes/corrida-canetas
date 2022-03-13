@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { JogadoresService, Jogador } from "../service/jogadores.service";
-import { CircuitosService, Circuito, Volta } from "../service/circuito.service";
+import { CircuitosService, Circuito } from "../service/circuito.service";
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,7 +12,6 @@ import { Router } from '@angular/router';
 export class PontuacaoPage implements OnInit {
 
   circuito: Circuito;
-  voltas: Volta[];
   jogadores: Jogador[];
 
   constructor(
@@ -24,10 +23,7 @@ export class PontuacaoPage implements OnInit {
   ngOnInit() { 
     this.circuitoService.circuito.subscribe(value => {
       this.circuito = value;
-    });
-    this.circuitoService.voltas.subscribe(value => {
-      this.voltas = value;
-    });
+    });   
     this.jogadoresService.jogadores.subscribe(value => {
       this.jogadores = value;
     });
@@ -38,7 +34,8 @@ export class PontuacaoPage implements OnInit {
   }
 
   selecionarTrofeu(indexJogador: number, indexTrofeu: number) {
-    const jogador = this.jogadores[indexJogador];
+    let jogador = this.jogadores[indexJogador];
+    let voltaAtual = this.circuito.numeroVolta;
     const trofeuSelecionado = jogador.trofeus.filter(value => {
       return value.selecionado === true;
     });
@@ -50,10 +47,10 @@ export class PontuacaoPage implements OnInit {
 
     else {
       if (trofeuSelecionado[0] === jogador.trofeus[indexTrofeu]) {
-        jogador.pontosTrofeu = 0;
+        jogador.voltas[voltaAtual].pontosTrofeu = 0;
       }
       else {
-        jogador.pontosTrofeu = jogador.trofeus[indexTrofeu].pontos;
+        jogador.voltas[voltaAtual].pontosTrofeu = jogador.trofeus[indexTrofeu].pontos;
       }
 
       jogador.trofeus[indexTrofeu].selecionado = !jogador.trofeus[indexTrofeu].selecionado;
@@ -71,23 +68,24 @@ export class PontuacaoPage implements OnInit {
   }
 
   atualizarPontuacao(event: any, index: number, tipoPontuacao: number) {
-    const voltaAtualizada = this.voltas[this.circuito.numeroVolta];    
-    let jogador = voltaAtualizada.jogadores[index];
+    let jogador = this.jogadores[index];
+    let voltaAtual = this.circuito.numeroVolta;
     if (event != null) {
       var valor = event.target.value != "" ? parseInt(event.target.value) : 0;
     }
 
     if (tipoPontuacao == 1)
-      jogador.bonus = valor;
+    jogador.voltas[voltaAtual].bonus = valor;
 
     if (tipoPontuacao == 2)
-      jogador.faltas = valor;
+    jogador.voltas[voltaAtual].faltas = valor;
 
-    jogador.pontuacao = jogador.bonus - jogador.faltas + jogador.pontosTrofeu;
+    jogador.voltas[voltaAtual].totalVolta = jogador.voltas[voltaAtual].bonus - jogador.voltas[voltaAtual].faltas + jogador.voltas[voltaAtual].pontosTrofeu;
     let pontuacaoText = document.getElementById(`lbPontuacao_${index}`);
-    pontuacaoText.innerText = jogador.pontuacao.toString();
-    voltaAtualizada.jogadores[index] = jogador;
-    this.circuitoService.atualizaPontuacaoVolta(voltaAtualizada, this.circuito.numeroVolta);
+    pontuacaoText.innerText = jogador.voltas[voltaAtual].totalVolta.toString();
+    this.jogadores[index] = jogador;
+    this.jogadoresService.salvarJogadores(this.jogadores);
+    console.log(this.jogadores);    
   }
 
   proximaPista() {
@@ -105,7 +103,7 @@ export class PontuacaoPage implements OnInit {
   }
 
   reiniciaTrofeusVisual(index: number) {
-    this.circuito.voltas[index].jogadores.forEach(jogador => {
+    this.circuito.jogadores.forEach(jogador => {
       jogador.trofeus.forEach(trofeu => {
         trofeu.selecionado = false;
       });

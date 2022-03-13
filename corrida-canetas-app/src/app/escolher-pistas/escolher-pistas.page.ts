@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PistasService, Pista } from "../service/pistas.service";
-import { CircuitosService, Circuito, Volta } from "../service/circuito.service";
+import { CircuitosService, Circuito } from "../service/circuito.service";
 import { JogadoresService, Jogador } from "../service/jogadores.service";
 
 
@@ -14,7 +14,6 @@ export class EscolherPistasPage {
 
   pistas: Pista[];
   circuito: Circuito;
-  voltas: Volta[];
   jogadores: Jogador[];
 
   constructor(public router: Router,
@@ -26,9 +25,6 @@ export class EscolherPistasPage {
     });
     circuitoService.circuito.subscribe(value => {
       this.circuito = value;
-    });
-    circuitoService.voltas.subscribe(value => {
-      this.voltas = value;
     });
     jogadoresService.jogadores.subscribe(value => {
       this.jogadores = value;
@@ -60,22 +56,14 @@ export class EscolherPistasPage {
   criaCircuito(pistasSelecionadas: Pista[], jogadores: Jogador[]) {
     this.circuito.pistas = pistasSelecionadas;
     this.zeraPontuacoes(jogadores);
-    this.voltas.splice(0,this.voltas.length);
-    for (let pista of pistasSelecionadas) {
-      this.voltas.push({
-        jogadores: jogadores,
-      });
-    }
-    this.circuitoService.salvarVoltas(this.voltas);
-    // this.circuito.voltas = this.voltas;
     this.circuitoService.salvarCircuito(this.circuito);
   }
 
   zeraPontuacoes(jogadores: Jogador[]) {
     for (let jogador of jogadores) {
-      jogador.pontuacao = 0;
+      // jogador.pontuacao = 0;
     }
-    this.jogadoresService.salvarJogadores(jogadores);
+    // this.jogadoresService.salvarJogadores(jogadores);
   }
 
   urlImagem(imagem: string) {

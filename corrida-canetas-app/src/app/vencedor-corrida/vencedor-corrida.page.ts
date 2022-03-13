@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CircuitosService, Circuito, Volta } from "../service/circuito.service";
+import { CircuitosService, Circuito } from "../service/circuito.service";
 import { JogadoresService, Jogador } from "../service/jogadores.service";
 import { NavigationEnd, Router } from '@angular/router';
 
@@ -34,11 +34,12 @@ export class VencedorCorridaPage implements OnInit {
     let labelNomeVencedor = document.getElementById(`nomeVencedor`);
     let labelPontuacao = document.getElementById(`pontuacaoVencedor`);
     labelNomeVencedor.innerText = vencedor.nome;
-    labelPontuacao.innerText = vencedor.pontuacao.toString();
+    labelPontuacao.innerText = vencedor.pontuacaoTotal.toString();
   }
 
   definirVencedor(){
-    return this.circuito.voltas[0].jogadores[0];
+    //TODO
+    return this.circuito.jogadores[0];
   }
 
 }

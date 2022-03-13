@@ -38,11 +38,9 @@ export class IniciarCorridaPage implements OnInit {
 
     this.jogadores.push({
       nome: `Jogador ${this.jogadores.length + 1}`,
-      bonus: 0,
-      faltas: 0,
-      pontosTrofeu: 0,
-      pontuacao: 0,
+      pontuacaoTotal: 0,
       trofeus: this.jogadoresService.criaTrofeus(),
+      voltas : this.jogadoresService.criaVoltas(),
     });
     this.salvarJogadores();
   }
