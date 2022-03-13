@@ -18,7 +18,6 @@ export class VencedorCorridaPage implements OnInit {
     public jogadoresService: JogadoresService,
     public circuitoService: CircuitosService
   ) {
-    circuitoService.circuito.subscribe(value => this.circuito = value);
     this.router.events.subscribe((e) => {
       if (e instanceof NavigationEnd) {
         this.imprimirVencedor()
@@ -26,9 +25,15 @@ export class VencedorCorridaPage implements OnInit {
     });
   }
   ngOnInit() {
+    this.circuitoService.circuito.subscribe(value => {
+      this.circuito = value;
+    });
+    this.jogadoresService.jogadores.subscribe(value => {
+      this.jogadores = value;
+    });
   }
 
-  imprimirVencedor(){
+  imprimirVencedor() {
     console.log(this.circuito);
     let vencedor = this.definirVencedor();
     let labelNomeVencedor = document.getElementById(`nomeVencedor`);
@@ -37,9 +42,41 @@ export class VencedorCorridaPage implements OnInit {
     labelPontuacao.innerText = vencedor.pontuacaoTotal.toString();
   }
 
-  definirVencedor(){
-    //TODO
-    return this.circuito.jogadores[0];
+  definirVencedor() {
+    let pontuacaoVencedor = this.encontraPontuacaoVencedor();
+    console.log(pontuacaoVencedor);
+
+    const arrayVencedor = this.circuito.jogadores.filter(value => {
+      return value.pontuacaoTotal === pontuacaoVencedor;
+    });
+
+    //TODO: implementar criterio de desempate
+    console.log(arrayVencedor);
+    return arrayVencedor[0];
+
+  }
+
+  encontraPontuacaoVencedor() {
+    return Math.max.apply(Math, this.circuito.jogadores.map(function (o) { return o.pontuacaoTotal; }));
+  }
+
+  finalizarPartida() {
+
+    this.jogadores.forEach(jogador => {
+      jogador.voltas.forEach(volta => {
+        volta.bonus = 0,
+          volta.faltas = 0,
+          volta.pontosTrofeu = 0,
+          volta.totalVolta = 0
+      });
+      jogador.pontuacaoTotal = 0;
+    });    
+    this.circuito.pistas = null;
+    this.circuito.numeroVolta = 0;
+    this.circuito.jogadores = this.jogadores;    
+    this.jogadoresService.salvarJogadores(this.jogadores);
+    this.circuitoService.salvarCircuito(this.circuito);
+    this.router.navigate(['home']);
   }
 
 }

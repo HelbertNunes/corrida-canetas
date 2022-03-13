@@ -83,26 +83,37 @@ export class PontuacaoPage implements OnInit {
     let pontuacaoText = document.getElementById(`lbPontuacao_${index}`);
     pontuacaoText.innerText = jogador.voltas[voltaAtual].totalVolta.toString();
     this.jogadores[index] = jogador;
-    this.jogadoresService.salvarJogadores(this.jogadores);
-    console.log(this.jogadores);    
+    this.jogadoresService.salvarJogadores(this.jogadores);    
   }
 
   proximaPista() {
 
     if (this.circuito.numeroVolta < 2) {
-      this.circuito.numeroVolta++;
-      this.circuito.jogadores = this.jogadores;
-      this.reiniciaTrofeusVisual(this.circuito.numeroVolta);
-      this.circuitoService.salvarCircuito(this.circuito);
-      console.log(this.circuito);
+      this.salvaEstadoVolta();
       this.router.navigate(['comecar-corrida']);
     }
     else {
+      this.salvaEstadoVolta();
       this.router.navigate(['vencedor-corrida']);
     }
   }
 
-  reiniciaTrofeusVisual(index: number) {
+  private salvaEstadoVolta() {
+    this.atualizaPontuacaoFinal();
+    this.circuito.numeroVolta++;
+    this.circuito.jogadores = this.jogadores;
+    this.reiniciaTrofeusVisual();
+    this.circuitoService.salvarCircuito(this.circuito);
+  }
+
+  atualizaPontuacaoFinal() {
+    let voltaAtual = this.circuito.numeroVolta;
+    this.jogadores.forEach(jogador => {
+      jogador.pontuacaoTotal += jogador.voltas[voltaAtual].totalVolta;
+    });
+  }
+
+  reiniciaTrofeusVisual() {
     this.circuito.jogadores.forEach(jogador => {
       jogador.trofeus.forEach(trofeu => {
         trofeu.selecionado = false;
