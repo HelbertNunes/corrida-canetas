@@ -54,7 +54,6 @@ export class PontuacaoPage implements OnInit {
       }
 
       jogador.trofeus[indexTrofeu].selecionado = !jogador.trofeus[indexTrofeu].selecionado;
-      // this.voltas[this.circuito.numeroVolta].jogadores[indexJogador].pontosTrofeu = jogador.pontosTrofeu;
       this.atualizarPontuacao(null, indexJogador, 3);
     }
   }
@@ -92,6 +91,7 @@ export class PontuacaoPage implements OnInit {
 
     if (this.circuito.numeroVolta < 2) {
       this.circuito.numeroVolta++;
+      this.circuito.jogadores = this.jogadores;
       this.reiniciaTrofeusVisual(this.circuito.numeroVolta);
       this.circuitoService.salvarCircuito(this.circuito);
       console.log(this.circuito);
