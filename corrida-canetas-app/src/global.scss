@@ -27,10 +27,6 @@
 
 @import url(//db.onlinewebfonts.com/c/d29e5b2a70883f04b6d8cce692f3616b?family=Marvin);
 
-
-
-
-
 .wrapper {
   display: grid;
   align-items: center;
@@ -44,6 +40,13 @@
   width: 50%;
 }
 
+.bottom {
+  position: fixed;
+  bottom: 0px;
+  width: 50%;
+  left: 25%;
+}
+
 ion-content {
-  --background: url("/assets/imgs/background/fundo.png");
+  --background: url("/assets/imgs/background/tabuleiroRedimensionado.jpg");
 }
