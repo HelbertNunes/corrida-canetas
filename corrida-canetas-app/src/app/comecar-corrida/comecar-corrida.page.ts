@@ -21,7 +21,7 @@ export class ComecarCorridaPage implements OnInit {
   ngOnInit() { }
 
   configuraIconePista() {
-    this.configuraFundoPista();
+    // this.configuraFundoPista(); TODO: Entender porque o fundo da pista nao carrega direito
 
     return `../../assets/imgs/pistas/${this.pistaSelecionada.imagem}`;
   }
