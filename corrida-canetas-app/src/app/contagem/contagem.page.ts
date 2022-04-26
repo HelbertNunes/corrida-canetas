@@ -26,6 +26,7 @@ export class ContagemPage implements OnInit {
   async carregaContagem() {
     const body = document.getElementById("fundo");
     const texto = document.getElementById("text");
+    const botao = document.getElementById("btPontuacao");
     await this.delay(500);
     body.style.backgroundColor = '#e83c47';
     texto.textContent = '3'
@@ -38,6 +39,8 @@ export class ContagemPage implements OnInit {
     await this.delay(1000);
     body.style.backgroundColor = '#3C8ACC';
     texto.textContent = 'JÁ!'
+    
+    botao.style.display = 'block';
   }
 
   delay(ms: number) {
