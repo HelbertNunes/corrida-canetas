@@ -14,8 +14,8 @@ export class ContagemPage implements OnInit {
     private router: Router
   ) {
     this.router.events.subscribe((e) => {
-      if (e instanceof NavigationEnd) {
-        this.carregaContagem()
+      if (e instanceof NavigationEnd) {        
+        this.carregaContagem();
       }
     });
   }
