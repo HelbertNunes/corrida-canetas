@@ -12,6 +12,6 @@ export class HomePage {
     private iab: InAppBrowser) { }
 
     abreSiteCompra(){
-      this.iab.create("https://loja.geeksnorcs.com.br/corrida-de-canetas/");
+      this.iab.create("https://geeksnorcs.com.br/corrida-de-canetas/");
     }
 }
