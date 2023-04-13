@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { NativeAudio } from '@awesome-cordova-plugins/native-audio/ngx';
 
 
 @Component({
@@ -17,13 +16,12 @@ export class ContagemPage implements OnInit {
 
   constructor(
     public platform: Platform,
-    private router: Router,
-    private nativeAudio: NativeAudio
+    private router: Router
   ) { }
 
   async ngOnInit() {
-    this.nativeAudio.preloadSimple('somContagem', '../../assets/sounds/Pop 2.mp3');
-    this.nativeAudio.preloadSimple('somJa', '../../assets/sounds/Big Bell.mp3');
+    // this.nativeAudio.preloadSimple('somContagem', '../../assets/sounds/Pop 2.mp3');
+    // this.nativeAudio.preloadSimple('somJa', '../../assets/sounds/Big Bell.mp3');
     this.body = document.getElementById("fundo");
     this.text = document.getElementById("text");
     this.button = document.getElementById("btPontuacao");
@@ -41,19 +39,15 @@ export class ContagemPage implements OnInit {
 
   async carregaContagem() {
     await this.delay(500);
-    this.nativeAudio.play('somContagem', () => console.log('somContagem is done playing'));
     this.body.style.backgroundColor = '#e83c47';
     this.text.textContent = '3'
     await this.delay(1000);
-    this.nativeAudio.play('somContagem', () => console.log('somContagem is done playing'));
     this.body.style.backgroundColor = '#F6A022';
     this.text.textContent = '2'
     await this.delay(1000);
-    this.nativeAudio.play('somContagem', () => console.log('somContagem is done playing'));
     this.body.style.backgroundColor = '#64A83E';
     this.text.textContent = '1'
     await this.delay(1000);
-    this.nativeAudio.play('somJa', () => console.log('somContagem is done playing'));
     this.body.style.backgroundColor = '#3C8ACC';
     this.text.textContent = 'JÁ!'
     this.button.style.display = 'block';

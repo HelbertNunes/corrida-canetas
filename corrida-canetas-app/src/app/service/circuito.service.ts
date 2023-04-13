@@ -7,6 +7,7 @@ export interface Circuito {
   pistas: Pista[];
   numeroVolta: number;
   jogadores: Jogador[];
+  contador:number;
 }
 
 @Injectable()
@@ -17,6 +18,7 @@ export class CircuitosService {
       pistas: null,
       numeroVolta: 0,
       jogadores: null,
+      contador: 0
     }
   );
 
